@@ -1,0 +1,19 @@
+name: Build and Test with Maven
+
+on: [push]  # 触发条件：代码推送（push）时自动运行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 使用Ubuntu系统运行任务
+
+    steps:
+    - uses: actions/checkout@v4  # 第一步：拉取当前仓库代码
+    
+    - name: Set up JDK 17  # 第二步：配置Java环境（版本需与项目一致，可按需调整）
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Run Maven build  # 第三步：执行Maven构建与测试
+      run: mvn clean test  # 核心命令：清理旧构建、运行所有测试
